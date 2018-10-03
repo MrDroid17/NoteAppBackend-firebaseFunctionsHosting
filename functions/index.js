@@ -1,6 +1,7 @@
 const functions = require('firebase-functions');
 const express = require('express');
 var firebase = require("firebase-admin");
+const cors = require('cors');
 var firebaseServiceAccount = require("./service-key.json");
 
 firebase.initializeApp({
@@ -12,6 +13,7 @@ let notesdb = firebase.database();
 let ref = notesdb.ref("Notes");
 
 const app = express();
+app.use(cors());
 
 app.get('/timestamp', (req, res) => {
     res.send(`${Date.now()}`)
@@ -23,6 +25,7 @@ app.post('/api/note/add', (req, res) => {
     var note_id = ref.push().key;
     var notesRef = ref.child(note_id);
     noteObj = req.body
+    noteObj.id = note_id;
 
     notesRef.set(noteObj).then(note => {
         console.info(note)

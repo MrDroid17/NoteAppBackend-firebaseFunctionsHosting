@@ -5,6 +5,7 @@ This is backend for using firebase functions and hosting using firebase admin sd
 ### **Steps for using this project**
 
 - clone project
+- cd to **functions** folder
 - run **npm install** to install required dependencies
 - create a **firebase project**
 - download admin sdk service key and rename is to **'service-key.json'**
